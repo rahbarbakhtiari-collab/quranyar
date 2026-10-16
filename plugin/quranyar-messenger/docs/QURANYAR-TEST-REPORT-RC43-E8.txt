@@ -1,0 +1,64 @@
+QuranYar Messenger 1.3.1-rc43 — Phase E / E8 Test Report
+Date: 2026-10-06
+Scope: Field-level Program form validation
+Base: 1.3.1-rc42 / schema 2026.10.06.2 / ledger 31/31
+Target schema: 2026.10.06.2 (unchanged)
+Target ledger after upgrade: 32/32 completed
+
+IMPLEMENTED IN E8
+- Added QYS_Programs_Module::field_validation_contract().
+- Client validates each Program application field inline before network submit.
+- Required multi_choice enforces one-or-more on client and server.
+- Required text/select/yes-no plus text length/number/date are validated client-side.
+- Server remains authoritative and returns safe field_key/field_type validation metadata.
+- Server validation errors map back to the exact field in the member UI.
+- First invalid field is focused; aria-invalid/aria-describedby/role=alert are explicit.
+- Draft E7 is preserved on client/server validation failure and cleared only on successful submit.
+- Added Health Center Field validation card.
+- Added migration 20261006_032_rc43_field_level_validation owned by programs.
+- No physical schema/data rewrite; schema remains 2026.10.06.2.
+
+TESTS — WORK TREE
+- PHP syntax: 54/54 PASS.
+- JavaScript syntax: 11/11 PASS.
+- CSS structural: 10/10 PASS.
+- E8 source/static contracts: 34/34 PASS.
+- E8 PHP validation runtime: 13/13 PASS.
+- E8 Client validation runtime: 15/15 PASS.
+- E8 contract runtime: 7/7 PASS.
+- Hook inventory: 57 actions / 6 filters / 2 shortcodes / 1 activation hook.
+
+SAFETY / UX PROPERTIES
+- Client validation cannot bypass server validation.
+- Required multi-choice is enforced on both client and server.
+- Invalid server answers include only safe field metadata and return HTTP 400.
+- No member identity, tenant rule, permission, capacity, application state or transition semantics changed.
+- Validation failure preserves the E7 local draft.
+- No network submit occurs when client validation fails.
+
+PRODUCTION EXPECTATION
+- Schema = 2026.10.06.2
+- Migration Ledger = 32/32 completed
+- Upgrade gate = ready
+- Module Lifecycle = 17/17 booted
+- Module Registry = 17 modules / 10 features
+- Programs migration count = 8
+- Members migration count = 4
+- Field validation = mode: field-level | required: client+server | multi: one-or-more | error: inline
+- Form draft remains ready
+- Async states and E1-E6 remain ready
+- Runtime schema gate probes = 0
+- Schema diagnostics = Physical: 12 / 12
+- failed / blocked / degraded = 0
+- Worker / Cron / Retention healthy
+
+MANUAL UX ACCEPTANCE
+Deferred to the final project UX/E2E acceptance pack per product decision.
+
+ROLLBACK
+- E8 makes no physical schema/data migration.
+- File rollback to RC42 does not require database rollback.
+- Completed migration 032 may remain as historical ledger data.
+
+NEXT
+Phase E / E9 — bulk applicant management.

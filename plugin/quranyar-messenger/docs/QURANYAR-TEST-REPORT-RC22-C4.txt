@@ -1,0 +1,92 @@
+QuranYar Messenger 1.3.1-rc22 — Phase C / C4 Test Report
+Date: 2026-10-06
+Scope: Core Service Extraction only
+Base: 1.3.1-rc21 / schema 2026.10.05.7 / ledger 10/10 / modules 17/17
+Target schema: 2026.10.05.7 (unchanged)
+Target ledger after upgrade: 11/11 completed
+
+IMPLEMENTED IN C4
+- Added QYS_Config as the canonical base configuration boundary.
+- Added QYS_Token_Store for token source, validation, encryption/decryption and persistence.
+- Added QYS_Table_Names for shared table naming/existence/scalar-count helpers.
+- Added QYS_Text_Normalizer for text, digits, mobile, national-id, header and template normalization.
+- Added QYS_Calendar_Service for Jalali/Gregorian calculations and Iran-local date conversion.
+- Added QYS_Bootstrap_Facade as the single activation/runtime bootstrap entry boundary.
+- QYS_Messenger compatibility constants remain but resolve canonical values from QYS_Config.
+- Legacy helper/token methods remain as compatibility facades and delegate to the new services.
+- Domain/repository call sites for extracted responsibilities were moved away from QYS_Messenger where mechanically safe.
+- MessageGateway now consumes TokenStore, TextNormalizer and Config directly.
+- Installer/Health/Migration Ledger consume Config/TokenStore directly for base concerns.
+- Module Manager owns new infrastructure migration:
+  20261006_011_rc22_core_services
+- Core module health now evaluates QYS_Bootstrap_Facade::health().
+- No domain table/column/data migration; schema remains 2026.10.05.7.
+
+COMPATIBILITY / SAFETY
+- Existing QYS_Messenger public compatibility constants remain available.
+- Existing helper methods remain callable through QYS_Messenger traits.
+- RC21 legacy helper behavior was compared with RC22 compatibility facade behavior and matched.
+- The number of runtime modules remains 17.
+- No new mandatory OpenSSL boot dependency is introduced: encrypted option storage can report unavailable while config-constant token fallback remains valid.
+- C4 does not change admission, attendance, messaging delivery-state, retention, tenant authorization or user-facing workflow semantics.
+
+TESTS — WORK TREE
+- PHP syntax: 45/45 PASS.
+- JavaScript syntax: 10/10 PASS.
+- CSS structural brace check: 10/10 PASS.
+- C4 source/static contracts: 54/54 PASS.
+- RC21 legacy helper behavior parity: PASS.
+- Module lifecycle runtime: 13 assertions PASS.
+  * 17/17 modules booted
+  * core migration_count = 1
+  * lifecycle migration_count = 1
+  * migrations 010 and 011 registered
+  * C4 health callback ready
+- RC21-ledger -> RC22 bounded migration regression: 17 assertions PASS.
+  * starting effective status = 10 completed + 011 pending
+  * bounded runner executes exactly 1 migration
+  * result = complete
+  * ending ledger = 11/11 completed
+  * 011 checkpoint = complete
+  * 011 plugin_version = 1.3.1-rc22
+- Full plugin include/init boot smoke: 15 assertions PASS.
+  * 17/17 modules booted
+  * failed = 0
+  * blocked = 0
+  * health_degraded = 0
+- Runtime hook parity RC21 -> RC22: PASS.
+  * actions: 53 = 53
+  * filters: 4 = 4
+  * shortcodes: 2 = 2
+  * activation hooks: 1 = 1
+
+OUT OF SCOPE
+- C5 dependency cycle breaking.
+- C6 complete Repository ownership.
+- C7 FeatureRegistry -> final Module Registry.
+- Phase D performance work.
+- Product feature / UX / UI changes.
+
+LIVE TEST STATUS
+- RC21 / C3 is Production Verified from Health Center evidence before this build.
+- RC22 has not yet been installed on Production.
+- Production verification of Ledger 11/11 and Core service lifecycle health is pending installation.
+- Live Edge Acceptance debt from Phase A/B remains deferred.
+
+INSTALL / UPGRADE
+- Replace RC21 with RC22; do not delete/reinstall the plugin.
+- No domain database migration is required.
+- First ordinary WordPress request should execute migration 011 automatically.
+- Expected Health Center after completion:
+  Schema = 2026.10.05.7
+  Migration Ledger = 11/11 completed
+  Upgrade gate = ready
+  Module lifecycle = 17/17 booted
+  core health = ok
+  failed/blocked/degraded = 0
+  Worker/Cron/Retention healthy
+
+ROLLBACK
+- C4 makes no physical domain schema/data migration.
+- File rollback to RC21 does not require database rollback.
+- Completed 011 ledger entry may remain as historical completed data.

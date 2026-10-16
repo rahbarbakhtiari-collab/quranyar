@@ -1,0 +1,85 @@
+QuranYar Messenger 1.3.1-rc21 — Phase C / C3 Test Report
+Date: 2026-10-06
+Scope: Module Lifecycle Contract only
+Base: 1.3.1-rc20 / schema 2026.10.05.7 / ledger 9/9
+Target schema: 2026.10.05.7 (unchanged)
+Target ledger after upgrade: 10/10 completed
+
+IMPLEMENTED IN C3
+- Added QYS_Module_Contract.
+- Added QYS_Callback_Module compatibility adapter.
+- Added QYS_Module_Manager.
+- Replaced direct eager init calls in the plugin entrypoint with one lifecycle bootstrap.
+- Registered 17 runtime modules with explicit boot dependencies and critical/optional classification.
+- Added dependency-aware boot ordering.
+- Optional module boot failures are isolated; unrelated modules continue booting.
+- Dependents of an unavailable module become blocked instead of booting blindly.
+- Critical dependency/boot failures remain fail-closed.
+- Raw exception messages are not exposed in lifecycle telemetry.
+- Module-owned migrations are registered before WordPress init / automatic upgrade execution.
+- Added migration 20261006_010_rc21_module_lifecycle.
+- MigrationLedger current_id now reflects the latest actual definition dynamically.
+- Existing FeatureRegistry is retained; it now hides/blocks only features whose lifecycle module did not boot.
+- Health Center reports module lifecycle aggregate and per-module safe diagnostics.
+- Added incident codes module_critical_failed and module_degraded.
+- No domain schema/data rewrite; schema remains 2026.10.05.7.
+
+INTENTIONALLY NOT IMPLEMENTED IN C3
+- No extraction of QYS_Messenger base services (C4).
+- No static dependency-cycle refactor (C5).
+- No repository-boundary rewrite (C6).
+- No FeatureRegistry -> final Module Registry conversion (C7).
+- No performance/UX/UI feature work.
+
+STATIC / SYNTAX TESTS
+- PHP lint: 39/39 PASS.
+- JavaScript syntax: 10/10 PASS.
+- CSS structural brace check: 10/10 PASS.
+- C3 source/static contracts: 17/17 PASS.
+
+RUNTIME-LIKE TESTS
+- Module lifecycle runtime assertions: 14 PASS.
+  * base dependency boots first
+  * optional boot exception is isolated
+  * dependent optional module is blocked
+  * unrelated optional module still boots
+  * safe error code contains exception class only, not raw message
+  * failed feature becomes unavailable
+  * unmanaged legacy feature remains backward-compatible
+- Critical missing dependency: fail-closed PASS.
+- Full plugin include/init boot smoke: PASS (17/17 modules booted, no degraded state).
+- C1/C2/C3 migration + RC20->RC21 automatic upgrade regression: 13 assertions PASS.
+  * RC20-equivalent 9 completed / 1 pending state reproduced
+  * automatic coordinator executes C3 exactly once
+  * ledger reaches 10/10
+  * C3 checkpoint=complete, attempts=1
+  * installer returns ready
+- Legacy hook registration parity RC20 -> RC21: PASS.
+  * actions 53 == 53
+  * filters 4 == 4
+  * shortcodes 2 == 2
+  * activation hooks 1 == 1
+
+REGRESSION / SCOPE SAFETY
+- Domain implementation outside the Core lifecycle integration is byte-identical to RC20 before documentation/version-note updates.
+- Existing public hook registrations are byte-for-behavior equivalent in the boot-smoke harness.
+- Schema version remains 2026.10.05.7.
+- No domain table/column migration is introduced.
+
+PRODUCTION PRECONDITION
+- RC20 / C2 was visually Production Verified before C3 work began:
+  schema 2026.10.05.7, ledger 9/9, upgrade gate ready, healthy overall state.
+
+PRODUCTION VERIFICATION AFTER INSTALL
+Expected:
+- Schema 2026.10.05.7
+- Migration Ledger 10/10 completed
+- Upgrade gate ready
+- Module lifecycle 17/17 booted
+- failed/blocked/degraded = 0
+- Worker/Cron/Retention healthy
+
+ROLLBACK
+- C3 performs no physical schema or domain data migration.
+- File rollback to RC20 requires no database rollback.
+- Completed migration 010 may remain as historical ledger data.

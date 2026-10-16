@@ -1,0 +1,339 @@
+/* QuranYar public experience. Intentionally restricted to the mini app container. */
+.qys-app{--qys-navy:#11396e;--qys-blue:#14407f;--qys-teal:#008b83;--qys-ink:#18314c;--qys-muted:#5e748a;--qys-line:#dce8f0;--qys-bg:#f3f7fb;--qys-gold:#eecb78;position:relative;width:min(100%,760px);max-width:760px;margin:0 auto 28px;padding:16px 16px 30px;border:0;border-radius:0;background:var(--qys-bg);color:var(--qys-ink);font-family:QYSIRANSansX,Tahoma,Arial,sans-serif!important;font-size:14px;line-height:1.9;direction:rtl;isolation:isolate}
+.qys-app *{box-sizing:border-box}
+.qys-app[dir=rtl]{text-align:right}
+.qys-app #qys-browser-notice:not([hidden]){display:block;text-align:center;background:#fff;padding:36px 24px;margin:12px auto;border-radius:24px;border:1px solid var(--qys-line);box-shadow:0 10px 24px #1a47720c}
+.qys-app #qys-browser-notice strong{font-size:1.5rem;color:var(--qys-blue)}
+.qys-app .qys-hero{padding:23px 24px 19px;background:linear-gradient(130deg,#123762 0%,#144b82 57%,#0d827f 100%);border-radius:24px;color:#fff;position:relative;overflow:hidden;box-shadow:0 15px 26px #1044761c}
+.qys-app .qys-hero:before,.qys-app .qys-hero:after{content:"";position:absolute;pointer-events:none;border:1px solid #ffffff1f;border-radius:50%}
+.qys-app .qys-hero:before{width:180px;height:180px;left:-58px;top:-78px}
+.qys-app .qys-hero:after{width:120px;height:120px;left:28px;bottom:-96px}
+.qys-app .qys-brand{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.qys-app .qys-brand-mark{flex:0 0 49px;display:grid;place-items:center;width:49px;height:49px;font-family:Georgia,serif;border-radius:15px;background:#ffffff24;color:var(--qys-gold);font-size:35px;line-height:1;border:1px solid #ffffff47}
+.qys-app .qys-eyebrow,.qys-app .qys-section-kicker{display:block;font-size:11px;font-weight:600;letter-spacing:.05px}
+.qys-app .qys-eyebrow{color:#d9eefb}
+.qys-app .qys-brand h1{color:#fff!important;font-size:24px;font-weight:800;margin:1px 0 0;line-height:1.6}
+.qys-app .qys-hero-greeting{font-size:20px;font-weight:500;margin:22px 0 2px;position:relative;z-index:1;color:#fff}
+.qys-app .qys-hero-greeting strong{font-weight:800;color:#fff}
+.qys-app .qys-hero-subtitle{font-size:12px;color:#e5f4fd;margin:0;position:relative;z-index:1}
+.qys-app .qys-dash-card,.qys-app .qys-surface{background:#fff;border:1px solid var(--qys-line);border-radius:21px;padding:20px;margin-top:15px;box-shadow:0 7px 20px #143c6010}
+.qys-app .qys-dash-card{margin-top:-1px;border-top-right-radius:0;border-top-left-radius:0}
+.qys-app .qys-section-title{display:flex;align-items:start;justify-content:space-between;gap:9px;margin:0 0 13px}
+.qys-app .qys-section-kicker{color:var(--qys-teal)}
+.qys-app .qys-section-title h2{font-size:17px;font-weight:800;color:var(--qys-ink)!important;margin:0;line-height:1.65}
+.qys-app .qys-section-title + p{font-weight:400;color:var(--qys-muted);margin:4px 0 16px;min-height:0}
+.qys-app .qys-pill{display:inline-flex;align-items:center;gap:5px;max-width:100%;font-weight:700;font-size:10px;border-radius:99px;padding:5px 10px;background:#f0f5fb;color:#244c7a;line-height:1.7;white-space:normal;border:1px solid #dce7f0}
+.qys-app .qys-pill--success{color:#106448;background:#eaf8f0;border-color:#bde8d3}
+.qys-app .qys-pill--warning{color:#956221;background:#fff7e9;border-color:#f3deb6}
+.qys-app .qys-pill--neutral{background:#f2f6fa;color:#486078}
+.qys-app .qys-progress-label{display:flex;justify-content:space-between;gap:8px;color:var(--qys-muted);font-size:12px;margin:12px 0 7px}
+.qys-app .qys-progress-label span:last-child{font-weight:800;color:var(--qys-blue);font-variant-numeric:tabular-nums}
+.qys-app .qys-progress{height:8px;border-radius:99px;background:#e7eef5;overflow:hidden}
+.qys-app .qys-progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#009b8d,#3ac0ac);border-radius:inherit;transition:width .3s ease}
+.qys-app .qys-status-line{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.qys-app .qys-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 1px}
+.qys-app .qys-shortcut{display:flex!important;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:4px;min-height:125px;width:auto;padding:17px 16px;background:#fff!important;color:var(--qys-ink)!important;border:1px solid var(--qys-line)!important;border-radius:19px!important;box-shadow:0 7px 18px #143c600c;text-align:right;text-decoration:none;transition:transform .16s,border-color .16s}
+.qys-app button.qys-shortcut{cursor:pointer}
+.qys-app button.qys-shortcut:hover{transform:translateY(-2px);border-color:#8bc7c5!important}
+.qys-app .qys-shortcut-icon{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;background:#e8f3fb;color:var(--qys-blue);font-size:19px}
+.qys-app .qys-shortcut--info .qys-shortcut-icon{background:#e5f5f2;color:var(--qys-teal)}
+.qys-app .qys-shortcut strong{font-size:14px;font-weight:800}
+.qys-app .qys-shortcut small{display:block;margin:0;font-size:11px;color:var(--qys-muted);font-weight:400;line-height:1.75}
+.qys-app .qys-surface>h3{font-size:16px;color:var(--qys-blue);margin:0 0 6px;font-weight:800}
+.qys-app .qys-surface>p{color:var(--qys-muted);margin:8px 0}
+.qys-app .qys-surface--accent{border-right:4px solid var(--qys-teal)}
+.qys-app #qys-manage>p:has(button){display:inline-flex;vertical-align:middle;margin:7px 5px 5px 0}
+.qys-app button:not(.qys-shortcut){padding:12px 17px;border-radius:12px;background:var(--qys-blue);border:1px solid var(--qys-blue);color:#fff;font:700 12px/1.7 QYSIRANSansX,Tahoma,sans-serif;min-height:44px;box-shadow:0 3px 8px #1643761a;transition:filter .16s}
+.qys-app button:not(.qys-shortcut):hover{filter:brightness(1.08)}
+.qys-app button:not(.qys-shortcut):disabled{cursor:not-allowed;opacity:.5}
+.qys-app button.qys-danger{background:#fff;color:#ac3441;border-color:#f1c4cb;box-shadow:none}
+.qys-app #qys-reactivate{background:#e8f6f3;color:#087268;border-color:#bce5de;box-shadow:none}
+.qys-app #qys-cancel-edit{background:#fff;color:var(--qys-blue);border-color:#bfcfdf;box-shadow:none}
+.qys-app #qys-profile-wrap{border:1px solid var(--qys-line);margin-top:16px;padding:19px 17px}
+.qys-app .qys-form-heading h3{color:var(--qys-ink);font-size:18px;margin:0}
+.qys-app .qys-form-heading p{font-size:12px;color:var(--qys-muted);margin:0 0 15px}
+.qys-app .qys-form-progress{display:flex;align-items:center;gap:8px;margin:16px 0 8px}
+.qys-app .qys-form-dot{display:flex;align-items:center;justify-content:center;flex:1;gap:5px;border-radius:11px;border:1px solid #dbe8f1;padding:8px 4px;background:#f7fafc;color:#74869a;font-weight:600;font-size:11px;min-width:0}
+.qys-app .qys-form-dot strong{display:grid;place-items:center;width:22px;height:22px;min-width:22px;border-radius:50%;font-size:11px;background:#e4edf4;color:#5e7891}
+.qys-app .qys-form-dot[aria-current=step]{border-color:#99d9d1;background:#ecfaf7;color:#006d68}
+.qys-app .qys-form-dot[aria-current=step] strong{background:var(--qys-teal);color:#fff}
+.qys-app .qys-form-step{border:0;border-radius:0;padding:7px 0 0}
+.qys-app .qys-form-step[hidden]{display:none!important}
+.qys-app .qys-form-step h4{display:flex;align-items:center;gap:9px;color:var(--qys-ink);font-size:15px;font-weight:800;margin:8px 0 0}
+.qys-app .qys-form-step h4 span{display:inline-grid;place-items:center;width:28px;height:28px;background:#e9f8f4;color:var(--qys-teal);border-radius:10px;font-size:13px}
+.qys-app .qys-step-note{font-size:12px;color:var(--qys-muted);margin:1px 0 15px}
+.qys-app .qys-form-step>p>label,.qys-app .qys-birthday-fields label{display:block;font-size:12px;font-weight:700;color:#37506d;margin:8px 0 7px}
+.qys-app .qys-form-step>p{margin:10px 0 14px}
+.qys-app #qys-enroll input:not([type=checkbox]),.qys-app #qys-enroll select{display:block;width:100%;min-height:46px;padding:10px 13px;border:1px solid #cddce7;border-radius:12px;background:#fbfdff;color:var(--qys-ink);font-family:QYSIRANSansX,Tahoma,sans-serif;font-size:13px;line-height:1.8;box-shadow:0 1px 0 #fff inset}
+.qys-app #qys-enroll input:focus,.qys-app #qys-enroll select:focus{border-color:var(--qys-teal);outline:3px solid #bfece54d}
+.qys-app #qys-enroll input[name="national_id"],.qys-app #qys-enroll input[name="mobile"]{direction:ltr;text-align:right;font-variant-numeric:tabular-nums}
+.qys-app #qys-enroll small{font-size:11px;font-weight:400;color:var(--qys-muted);margin-top:5px}
+.qys-app .qys-birthday{border:1px solid #d8e6ee;background:#f8fbfd;border-radius:15px;padding:10px 12px 13px;margin:12px 0}
+.qys-app .qys-birthday legend{font-weight:800;color:var(--qys-blue);font-size:12px}
+.qys-app .qys-birthday-fields{display:grid;grid-template-columns:.9fr 1.2fr 1fr;gap:9px}
+.qys-app .qys-birthday-fields label{min-width:0}
+.qys-app #qys-birth-year{text-align:center!important;direction:ltr!important}
+.qys-app .qys-check{background:#f0f8f5;border:1px solid #cde9de;border-radius:12px;padding:12px}
+.qys-app .qys-check label{align-items:flex-start;font-weight:600;color:#315c55;font-size:12px}
+.qys-app .qys-form-controls{display:flex;gap:9px;justify-content:space-between;margin:16px 0 0}
+.qys-app button.qys-form-back{background:#fff;color:var(--qys-blue);border-color:#c9daeb;box-shadow:none}
+.qys-app #qys-feedback:not(:empty){padding:13px 15px;margin-top:15px;border-radius:12px;background:#eaf4fb;border:1px solid #c6deef;color:#174e75;font-size:12px;font-weight:600;white-space:pre-wrap}
+.qys-app [hidden]{display:none!important}
+.qys-app button:focus-visible,.qys-app a:focus-visible,.qys-app input:focus-visible,.qys-app select:focus-visible{outline:3px solid var(--qys-teal)!important;outline-offset:2px}
+@media(max-width:550px){.qys-app{margin:0 auto;padding:8px 9px 24px}.qys-app .qys-hero{padding:20px 17px;border-radius:19px}.qys-app .qys-brand h1{font-size:21px}.qys-app .qys-hero-greeting{font-size:18px}.qys-app .qys-dash-card,.qys-app .qys-surface{padding:17px 14px;border-radius:17px}.qys-app .qys-dash-card{border-top-left-radius:0;border-top-right-radius:0}.qys-app .qys-shortcut{min-height:115px;margin:0;padding:13px 12px}.qys-app #qys-manage>p:has(button){display:flex;max-width:100%;margin:8px 0}.qys-app #qys-manage>p:has(button) button{width:100%}.qys-app .qys-form-dot{font-size:10px;padding:6px 2px}.qys-app .qys-form-dot strong{width:20px;height:20px;min-width:20px}}
+@media(max-width:360px){.qys-app .qys-shortcuts{grid-template-columns:1fr}.qys-app .qys-birthday-fields{grid-template-columns:repeat(2,minmax(0,1fr))}.qys-app .qys-birthday-fields label:last-child{grid-column:1/-1}.qys-app .qys-form-dot{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.qys-app *{scroll-behavior:auto!important;transition:none!important}}
+
+/* Phase 3C — member app shell and five-destination mobile navigation. */
+body.qys-miniapp-mode{background:#f3f7fb!important}
+body.qys-miniapp-mode .wp-site-blocks>header.wp-block-template-part,
+body.qys-miniapp-mode .wp-site-blocks>footer.wp-block-template-part,
+body.qys-miniapp-mode .wp-block-post-title{display:none!important}
+body.qys-miniapp-mode .wp-site-blocks{padding-top:0!important;padding-bottom:0!important}
+body.qys-miniapp-mode main.wp-block-group,body.qys-miniapp-mode .wp-block-post-content{margin-block-start:0!important}
+.qys-app{padding-bottom:calc(102px + env(safe-area-inset-bottom))}
+.qys-member-shell{min-height:calc(100dvh - 110px)}
+.qys-member-view{animation:qys-view-in .16s ease both}
+.qys-member-view[hidden]{display:none!important}
+.qys-view-heading{padding:10px 5px 3px;margin:0 0 7px}
+.qys-view-heading h2{margin:0;color:var(--qys-ink)!important;font-size:22px;line-height:1.6}
+.qys-view-heading p{margin:3px 0 0;color:var(--qys-muted);font-size:12px;line-height:1.8}
+.qys-home-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0 0}
+.qys-app .qys-action-card{display:flex!important;flex-direction:column;align-items:flex-start;gap:10px;min-height:132px;padding:15px!important;border:1px solid var(--qys-line)!important;border-radius:18px!important;background:#fff!important;color:var(--qys-ink)!important;box-shadow:0 7px 18px #143c600c!important;text-align:right;cursor:pointer}
+.qys-app .qys-action-card:hover{filter:none!important;transform:translateY(-1px);border-color:#a9cbdc!important}
+.qys-action-card>span:last-child{display:block}
+.qys-action-card strong,.qys-action-card small{display:block}
+.qys-action-card strong{font-size:13px;color:var(--qys-ink)}
+.qys-action-card small{margin-top:3px;font-size:10px;line-height:1.65;color:var(--qys-muted);font-weight:500}
+.qys-action-icon,.qys-service-icon{display:grid;place-items:center;width:37px;height:37px;border-radius:12px;background:#eaf3fb;color:var(--qys-blue);flex:0 0 37px}
+.qys-action-icon svg,.qys-service-icon svg,.qys-member-bottomnav svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.qys-action-card:nth-child(2) .qys-action-icon{background:#e8f7f3;color:#08796f}
+.qys-action-card:nth-child(3) .qys-action-icon{background:#fff5df;color:#9a6a19}
+.qys-privacy-note{display:block;color:var(--qys-muted);font-size:11px;line-height:1.8;margin:12px 4px 0}
+.qys-service-list{display:grid;gap:11px;margin-top:10px}
+.qys-service-card{display:flex;gap:13px;align-items:flex-start;background:#fff;border:1px solid var(--qys-line);border-radius:18px;padding:16px;box-shadow:0 6px 18px #143c600b}
+.qys-service-card>div{min-width:0;flex:1}
+.qys-service-card strong{display:block;color:var(--qys-ink);font-size:14px}
+.qys-service-card p{margin:3px 0 7px;color:var(--qys-muted);font-size:11px;line-height:1.75}
+.qys-service-icon--gift{font-size:21px;background:#fff5df;color:#a66c00}
+.qys-service-state{display:inline-flex;border-radius:999px;background:#f0f5f9;color:#51677d;padding:4px 9px;font-size:10px;font-weight:700}
+.qys-app .qys-inline-action{min-height:34px!important;padding:6px 10px!important;margin-right:7px;background:#fff!important;color:var(--qys-blue)!important;border-color:#c8d9e8!important;box-shadow:none!important;font-size:10px!important}
+.qys-account-card{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 13px}
+.qys-account-card>div{background:linear-gradient(180deg,#fff,#f8fbfe);border:1px solid var(--qys-line);border-radius:16px;padding:15px}
+.qys-account-card span,.qys-account-card strong{display:block}
+.qys-account-card span{font-size:10px;color:var(--qys-muted)}
+.qys-account-card strong{margin-top:3px;color:var(--qys-ink);font-size:12px;line-height:1.7}
+.qys-more-list{overflow:hidden;background:#fff;border:1px solid var(--qys-line);border-radius:18px;box-shadow:0 6px 18px #143c6009}
+.qys-app .qys-more-list>button,.qys-more-list>a,.qys-more-static{display:flex!important;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:66px;padding:12px 15px!important;border:0!important;border-bottom:1px solid #e8eef4!important;border-radius:0!important;background:#fff!important;color:var(--qys-ink)!important;text-decoration:none!important;box-shadow:none!important;text-align:right}
+.qys-more-list>*:last-child{border-bottom:0!important}
+.qys-more-list span{min-width:0}
+.qys-more-list strong,.qys-more-list small{display:block}
+.qys-more-list strong{font-size:12px;color:var(--qys-ink)}
+.qys-more-list small{margin-top:2px;font-size:10px;color:var(--qys-muted);font-weight:500}
+.qys-more-list b{font-size:23px;font-weight:400;color:#90a4b6;transform:rotate(180deg)}
+.qys-member-bottomnav{position:fixed;z-index:1000;left:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translateX(-50%);display:grid;grid-template-columns:repeat(5,1fr);width:min(calc(100% - 16px),744px);padding:7px 7px 6px;border:1px solid #d9e4ed;border-radius:22px;background:rgba(255,255,255,.96);box-shadow:0 12px 36px rgba(15,48,78,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.qys-app .qys-member-bottomnav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:55px!important;padding:5px 2px!important;border:0!important;border-radius:14px!important;background:transparent!important;color:#6b7d90!important;box-shadow:none!important;font-size:10px!important;font-weight:700!important;line-height:1.3!important;position:relative}
+.qys-app .qys-member-bottomnav button svg{width:22px;height:22px}
+.qys-app .qys-member-bottomnav button[aria-current=page]{background:#eaf5f4!important;color:#08776f!important}
+.qys-app .qys-member-bottomnav button.is-pending:after{content:"";position:absolute;top:7px;right:calc(50% - 15px);width:6px;height:6px;border-radius:50%;background:#e6a63a;box-shadow:0 0 0 2px #fff}
+.qys-app [data-qys-view="attendance"] #qys-attendance{margin-top:7px}
+@keyframes qys-view-in{from{opacity:.45;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media(max-width:550px){.qys-app{padding-bottom:calc(96px + env(safe-area-inset-bottom))}.qys-home-actions{grid-template-columns:1fr 1fr}.qys-app .qys-action-card{min-height:112px}.qys-home-actions .qys-action-card:last-child{grid-column:1/-1;min-height:88px;flex-direction:row;align-items:center}.qys-account-card{grid-template-columns:1fr}.qys-member-bottomnav{width:calc(100% - 12px);bottom:max(5px,env(safe-area-inset-bottom));border-radius:20px}.qys-app .qys-member-bottomnav button{min-height:52px!important}.qys-view-heading h2{font-size:20px}}
+@media(max-width:360px){.qys-app .qys-member-bottomnav button{font-size:9px!important;padding-inline:0!important}.qys-app .qys-member-bottomnav button svg{width:20px;height:20px}.qys-home-actions{grid-template-columns:1fr}.qys-home-actions .qys-action-card:last-child{grid-column:auto;min-height:104px;flex-direction:column;align-items:flex-start}}
+
+/* Phase 3D — native-app polish, accessibility, loading/error/offline states. */
+.qys-skip-link{position:fixed;z-index:2000;top:6px;right:8px;transform:translateY(-160%);padding:9px 13px;border-radius:10px;background:#fff;color:#11396e!important;border:2px solid #008b83;text-decoration:none!important;font-weight:800;transition:transform .15s}
+.qys-skip-link:focus{transform:translateY(0)}
+.qys-app button,.qys-app a,[data-qys-nav],[data-qys-go]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.qys-app-system-state{display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;margin:6px 4px 10px;padding:10px 13px;border:1px solid #dbe6ef;border-radius:14px;background:#fff;color:#476078;font-size:11px;font-weight:600;box-shadow:0 4px 15px #143c6008}
+.qys-app-system-state[hidden]{display:none!important}
+.qys-app-system-state.is-error{justify-content:flex-start;flex-wrap:wrap;background:#fff6f6;border-color:#efc9cd;color:#8d303b}
+.qys-app-system-state.is-offline{background:#fff9eb;border-color:#edd9aa;color:#77561a}
+.qys-app-state-spinner,.qys-att-spinner{display:inline-block;width:18px;height:18px;border:2px solid #c9dce8;border-top-color:#008b83;border-radius:50%;animation:qys-spin .8s linear infinite;flex:0 0 auto}
+.qys-app .qys-app-state-retry{margin-inline-start:auto;min-height:36px!important;padding:6px 12px!important;background:#fff!important;color:#8d303b!important;border-color:#e4b9be!important;box-shadow:none!important;font-size:10px!important}
+.qys-member-view h1:focus,.qys-member-view h2:focus,.qys-form-step h4:focus{outline:0}
+.qys-app .qys-member-bottomnav button{min-width:44px;min-height:56px!important}
+.qys-app .qys-member-bottomnav button:active{transform:scale(.97)}
+.qys-app .qys-member-bottomnav button[aria-current=page] svg{stroke-width:2.15}
+.qys-app input,.qys-app select,.qys-app button{font-size:max(12px,1em)}
+@keyframes qys-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.qys-app-state-spinner,.qys-att-spinner{animation:none;border-top-color:#008b83}.qys-app .qys-member-bottomnav button:active{transform:none}}
+@media(forced-colors:active){.qys-app-system-state,.qys-member-bottomnav,.qys-service-card,.qys-action-card{border:1px solid CanvasText!important}.qys-app .qys-member-bottomnav button[aria-current=page]{outline:2px solid Highlight!important}.qys-app-state-spinner,.qys-att-spinner{border-color:CanvasText;border-top-color:Highlight}}
+
+@media(max-width:550px){.qys-app #qys-enroll input:not([type=checkbox]),.qys-app #qys-enroll select{font-size:16px!important}}
+
+/* Phase 3E — home dashboard polish: summary first, no duplicate navigation cards. */
+.qys-app [data-qys-view="home"] .qys-hero{padding:18px 21px 16px;border-radius:21px;box-shadow:0 11px 23px #10447617}
+.qys-app [data-qys-view="home"] .qys-brand-mark{width:43px;height:43px;flex-basis:43px;border-radius:13px;font-size:30px}
+.qys-app [data-qys-view="home"] .qys-brand h1{font-size:22px}
+.qys-app [data-qys-view="home"] .qys-hero-greeting{margin-top:15px;font-size:18px}
+.qys-app [data-qys-view="home"] .qys-hero-subtitle{font-size:11px;line-height:1.75}
+.qys-app [data-qys-view="home"] .qys-dash-card{padding:15px 16px 14px;margin-top:10px;border-radius:18px}
+.qys-app [data-qys-view="home"] .qys-section-title{margin-bottom:7px;align-items:center}
+.qys-app [data-qys-view="home"] .qys-section-title h2{font-size:15px}
+.qys-app [data-qys-view="home"] #qys-member-status{margin:4px 0 8px;color:var(--qys-muted);font-size:11px;line-height:1.75}
+.qys-app [data-qys-view="home"] .qys-status-line{margin-top:9px;gap:6px}
+.qys-app [data-qys-view="home"] .qys-pill{padding:4px 8px;font-size:9.5px}
+.qys-app #qys-progress-wrap[hidden]{display:none!important}
+.qys-home-dashboard{display:grid;gap:10px;margin-top:11px}
+.qys-home-primary-card{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px;background:linear-gradient(135deg,#fff 0%,#f5fbfb 100%);border:1px solid #d4e9e5;border-radius:18px;box-shadow:0 7px 18px #143c600b}
+.qys-home-card-copy{min-width:0;flex:1}
+.qys-home-card-copy h2{margin:1px 0 3px!important;color:var(--qys-ink)!important;font-size:15px!important;line-height:1.7!important}
+.qys-home-card-copy p{margin:0;color:var(--qys-muted);font-size:10.5px;line-height:1.75}
+.qys-app .qys-home-primary-action{flex:0 0 auto;min-height:39px!important;padding:7px 11px!important;border-radius:11px!important;background:#e7f6f2!important;color:#087268!important;border-color:#b9e4da!important;box-shadow:none!important;font-size:10px!important;white-space:nowrap}
+.qys-home-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qys-home-mini-card{display:flex;align-items:center;gap:10px;min-height:72px;padding:12px 13px;background:#fff;border:1px solid var(--qys-line);border-radius:16px;box-shadow:0 5px 15px #143c6008}
+.qys-home-mini-icon{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;border-radius:11px;background:#eaf3fb;color:var(--qys-blue)}
+.qys-home-mini-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.qys-home-mini-icon--gift{background:#fff5df;color:#9a6a19;font-size:18px}
+.qys-home-mini-card>div{min-width:0}
+.qys-home-mini-card span:not(.qys-home-mini-icon){display:block;color:var(--qys-muted);font-size:9.5px;line-height:1.5}
+.qys-home-mini-card strong{display:block;margin-top:2px;color:var(--qys-ink);font-size:11px;line-height:1.6}
+.qys-member-bottomnav{box-shadow:0 8px 26px rgba(15,48,78,.15)}
+.qys-app .qys-member-bottomnav button[aria-current=page]{background:#edf8f6!important}
+@media(max-width:550px){
+  .qys-app{padding-left:6px;padding-right:6px}
+  .qys-app [data-qys-view="home"] .qys-hero{padding:16px 16px 14px;border-radius:18px}
+  .qys-app [data-qys-view="home"] .qys-hero-greeting{font-size:17px}
+  .qys-app [data-qys-view="home"] .qys-dash-card{padding:13px 14px;border-radius:16px}
+  .qys-home-primary-card{padding:14px;border-radius:16px;align-items:flex-start;flex-direction:column}
+  .qys-app .qys-home-primary-action{align-self:stretch;width:100%;text-align:center}
+  .qys-home-mini-grid{gap:8px}
+  .qys-home-mini-card{padding:10px;min-height:67px;border-radius:15px}
+  .qys-member-bottomnav{padding:5px 6px 4px;border-radius:18px}
+  .qys-app .qys-member-bottomnav button{min-height:50px!important}
+}
+@media(max-width:340px){.qys-home-mini-grid{grid-template-columns:1fr}}
+
+/* Phase 3F — Services / More polish and attention states. */
+.qys-services-summary{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:8px 0 12px}
+.qys-services-summary>div{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:54px;padding:11px 13px;background:#fff;border:1px solid var(--qys-line);border-radius:15px;box-shadow:0 4px 13px #143c6007}
+.qys-services-summary span{font-size:10px;color:var(--qys-muted)}
+.qys-services-summary strong{font-size:17px;color:var(--qys-ink);font-weight:800}
+.qys-service-card{transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+.qys-service-card.is-active{border-color:#c7e7df;background:linear-gradient(135deg,#fff 0%,#f8fdfc 100%)}
+.qys-service-card.is-attention{border-color:#ecd9ad;background:linear-gradient(135deg,#fff 0%,#fffbf2 100%)}
+.qys-service-card:active{transform:scale(.995)}
+.qys-service-copy{min-width:0;flex:1}
+.qys-service-title-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.qys-service-title-row strong{margin:0}
+.qys-service-state{border:1px solid transparent;white-space:nowrap}
+.qys-service-state.is-active{background:#e9f7f0;color:#126848;border-color:#ccebdc}
+.qys-service-state.is-attention{background:#fff6df;color:#815c13;border-color:#f0dfad}
+.qys-service-state.is-muted{background:#f1f4f7;color:#66788a;border-color:#e1e8ee}
+.qys-service-state.is-loading{background:#f0f5f9;color:#51677d}
+.qys-app .qys-service-link{display:inline-flex!important;align-items:center;gap:5px;min-height:34px!important;padding:4px 0!important;margin-top:1px!important;border:0!important;background:transparent!important;color:#0b7269!important;box-shadow:none!important;font-size:10.5px!important;font-weight:800!important}
+.qys-service-link b{font-size:17px;font-weight:400;transform:rotate(180deg)}
+.qys-services-note{margin-top:11px;padding:10px 12px;border-radius:13px;background:#eef6fb;color:#506b80;font-size:10.5px;line-height:1.75;border:1px solid #dceaf3}
+.qys-services-note.is-attention{background:#fff9eb;color:#775b20;border-color:#f0dfb5}
+.qys-account-summary{display:flex;align-items:center;gap:11px;padding:14px 15px;margin:8px 0 11px;background:linear-gradient(135deg,#fff 0%,#f5fbfb 100%);border:1px solid #d7e8e6;border-radius:18px;box-shadow:0 6px 17px #143c6009}
+.qys-account-avatar{display:grid;place-items:center;flex:0 0 43px;width:43px;height:43px;border-radius:14px;background:#e9f5f3;color:#08776f;font-size:18px;font-weight:800}
+.qys-account-summary-copy{min-width:0;flex:1}
+.qys-account-summary-copy>span{display:block;color:var(--qys-muted);font-size:9.5px}
+.qys-account-summary-copy strong{display:block;color:var(--qys-ink);font-size:13px;line-height:1.7}
+.qys-account-summary-copy small{display:block;color:var(--qys-muted);font-size:9.5px;line-height:1.6}
+.qys-runtime-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#b5c1ca;box-shadow:0 0 0 3px #eef2f5}
+.qys-runtime-dot.is-online{background:#16a06f;box-shadow:0 0 0 3px #e4f6ee}
+.qys-runtime-dot.is-offline{background:#d69b34;box-shadow:0 0 0 3px #fff3dd}
+.qys-app .qys-member-bottomnav button.is-attention:after{content:"";position:absolute;top:7px;right:calc(50% - 15px);width:6px;height:6px;border-radius:50%;background:#e6a63a;box-shadow:0 0 0 2px #fff}
+@media(max-width:420px){.qys-service-title-row{align-items:flex-start}.qys-service-title-row strong{padding-top:2px}.qys-services-summary>div{padding:10px 11px}.qys-account-summary{padding:12px 13px}.qys-service-state{font-size:9.5px;padding-inline:7px}}
+@media(prefers-reduced-motion:reduce){.qys-service-card{transition:none}.qys-service-card:active{transform:none}}
+@media(forced-colors:active){.qys-services-summary>div,.qys-account-summary,.qys-services-note{border:1px solid CanvasText!important}.qys-runtime-dot{border:1px solid CanvasText}}
+
+/* D4: Home program cards live in the base shell so Programs feature CSS can stay lazy. */
+.qys-home-programs{margin-top:4px;padding:14px;background:linear-gradient(180deg,#fff 0%,#fbfdff 100%);border:1px solid #dce6ef;border-radius:18px;box-shadow:0 7px 20px rgba(23,60,98,.035)}
+.qys-home-programs[hidden]{display:none!important}.qys-home-programs-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.qys-home-programs-head h2{margin:1px 0 0!important;color:#173f69!important;font-size:15px!important;line-height:1.6!important}.qys-app .qys-home-programs-all{min-height:34px!important;padding:6px 10px!important;border-radius:10px!important;background:#f3f8fc!important;border:1px solid #d5e3ee!important;color:#315f88!important;box-shadow:none!important;font-size:10px!important;white-space:nowrap}.qys-home-program-list{display:grid;gap:9px}.qys-home-program-card{padding:12px;border:1px solid #e0e9f1;border-radius:14px;background:#fff}.qys-home-program-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.qys-home-program-card-top>span{font-size:9px;color:#688096}.qys-home-program-state{padding:3px 7px;border-radius:999px;background:#eaf7f5;color:#08766d!important;font-weight:800}.qys-home-program-card h3{margin:5px 0 3px!important;color:#173f69!important;font-size:12.5px!important;line-height:1.65!important}.qys-home-program-card p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin:0 0 8px;color:#6a8094;font-size:10px;line-height:1.75}.qys-home-program-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px}.qys-home-program-card-bottom small{min-width:0;color:#6a8094;font-size:9px;line-height:1.5}.qys-app .qys-home-program-card-bottom button{flex:0 0 auto;min-height:31px!important;padding:5px 9px!important;border-radius:9px!important;background:#edf7ff!important;border:1px solid #cfe3f4!important;color:#225f91!important;box-shadow:none!important;font-size:9.5px!important}
+.qys-feature-load-error{margin:12px 0;padding:14px;border:1px solid #f0c7c7;border-radius:14px;background:#fff8f8;color:#783636}.qys-feature-load-error p{margin:6px 0 10px}.qys-feature-load-error button{min-height:36px!important}
+
+/* Phase E / E6 — shared async loading / empty / error primitives. */
+.qys-async-state{display:flex;align-items:center;gap:10px;min-height:66px;padding:13px 14px;border:1px solid #dce6ef;border-radius:14px;background:#f8fbfd;color:#476078}
+.qys-async-copy{display:grid;gap:3px;min-width:0;flex:1}.qys-async-copy strong{font-size:11.5px;line-height:1.7;color:#315873}.qys-async-copy small{font-size:9.5px;line-height:1.8;color:#71879a}
+.qys-async-state.is-empty{background:#fbfcfd;border-style:dashed}.qys-async-state.is-empty .qys-async-copy strong{color:#526b80}
+.qys-async-state.is-error{background:#fff7f7;border-color:#edc9ce;color:#873743}.qys-async-state.is-error .qys-async-copy strong{color:#873743}.qys-async-state.is-error .qys-async-copy small{color:#8f5c63}
+.qys-async-spinner{display:inline-block;width:18px;height:18px;border:2px solid #c9dce8;border-top-color:#008b83;border-radius:50%;animation:qys-spin .8s linear infinite;flex:0 0 auto}
+.qys-app .qys-async-action{flex:0 0 auto;min-height:34px!important;padding:6px 10px!important;border-radius:9px!important;background:#fff!important;border:1px solid #d9b3b8!important;color:#873743!important;box-shadow:none!important;font-size:9.5px!important}
+.qys-home-programs[data-state="loading"] .qys-home-programs-all,.qys-home-programs[data-state="error"] .qys-home-programs-all{opacity:.65}
+@media(max-width:420px){.qys-async-state{align-items:flex-start;flex-wrap:wrap}.qys-app .qys-async-action{margin-inline-start:auto}}
+@media(prefers-reduced-motion:reduce){.qys-async-spinner{animation:none}}
+@media(forced-colors:active){.qys-async-state{border:1px solid CanvasText!important}.qys-async-spinner{border-color:CanvasText;border-top-color:Highlight}}
+@media(max-width:420px){.qys-home-programs{padding:12px;border-radius:16px}.qys-home-programs-head{align-items:flex-start}.qys-home-program-card{padding:11px}.qys-home-program-card-bottom{align-items:flex-end}}
+
+
+/* Phase E / E2 — Programs gate is explicit; no silent redirect to Profile. */
+.qys-program-access-gate-shell{display:grid;gap:9px;margin:12px 0;padding:16px;border:1px solid #ead7a9;border-radius:16px;background:linear-gradient(135deg,#fffdf8 0%,#fff8e9 100%);color:#6f5522;box-shadow:0 6px 18px #6c4e1808}
+.qys-program-access-gate-shell[hidden],#qys-program-content[hidden]{display:none!important}
+.qys-program-gate-kicker{font-size:9.5px;font-weight:800;color:#98712a}
+.qys-program-access-gate-shell strong{font-size:13px;line-height:1.8;color:#664a15}
+.qys-program-access-gate-shell p{margin:0;color:#78633a;font-size:10.5px;line-height:1.85}
+.qys-app .qys-program-access-gate-shell button{justify-self:start;min-height:38px!important;padding:7px 13px!important;border-radius:11px!important;background:#fff!important;color:#7b5b18!important;border:1px solid #e2c983!important;box-shadow:none!important;font-size:10.5px!important;font-weight:800!important}
+.qys-app .qys-program-access-gate-shell button:focus-visible{outline:3px solid rgba(195,147,45,.22);outline-offset:2px}
+@media(max-width:420px){.qys-program-access-gate-shell{padding:14px;border-radius:14px}.qys-app .qys-program-access-gate-shell button{width:100%;justify-content:center}}
+@media(forced-colors:active){.qys-program-access-gate-shell{border:1px solid CanvasText!important}}
+
+
+/* RC52 maintenance — member mini-app readability, contrast and human-first hierarchy. */
+.qys-app{
+  --qys-teal:#08766d;
+  --qys-ink:#142f49;
+  --qys-muted:#405a72;
+  --qys-line:#cbd9e4;
+  font-size:16px;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.qys-app .qys-eyebrow,.qys-app .qys-section-kicker{font-size:12.5px;font-weight:700}
+.qys-app .qys-hero-subtitle{font-size:14px;color:#f0f8fd}
+.qys-app .qys-section-title h2{font-size:19px}
+.qys-app .qys-section-title+p,.qys-view-heading p{font-size:14px;color:var(--qys-muted);line-height:1.9}
+.qys-view-heading h2{font-size:23px}
+.qys-app .qys-pill{font-size:12.5px;padding:6px 10px;line-height:1.55}
+.qys-app .qys-progress-label{font-size:13.5px}
+.qys-app .qys-surface>h3{font-size:18px}
+.qys-app .qys-surface>p{font-size:14px;color:var(--qys-muted);line-height:1.9}
+.qys-app button:not(.qys-shortcut){font-size:14px;min-height:48px;padding:11px 16px}
+.qys-app .qys-form-heading p,.qys-app .qys-step-note{font-size:13.5px;line-height:1.9}
+.qys-app .qys-form-dot{font-size:12.5px;color:#435d76}
+.qys-app .qys-form-dot strong{font-size:12.5px}
+.qys-app .qys-form-step h4{font-size:17px}
+.qys-app .qys-form-step>p>label,.qys-app .qys-birthday-fields label{font-size:14px;color:#2f4b67}
+.qys-app #qys-enroll input:not([type=checkbox]),.qys-app #qys-enroll select,.qys-app #qys-enroll textarea{font-size:16px;min-height:50px;color:#142f49;border-color:#b9cad8;background:#fff}
+.qys-app #qys-enroll input::placeholder,.qys-app #qys-enroll textarea::placeholder{color:#5b7186;opacity:1}
+.qys-app #qys-enroll small,.qys-privacy-note{font-size:13px;color:#465f77;line-height:1.85}
+.qys-app .qys-birthday legend{font-size:14px}
+.qys-app .qys-check label{font-size:14px;color:#294f49;line-height:1.8}
+.qys-app #qys-feedback:not(:empty){font-size:13.5px;line-height:1.85;color:#163f64}
+.qys-app-system-state{font-size:13px;color:#405a72}
+.qys-action-card strong{font-size:15px}.qys-action-card small{font-size:13px;color:#405a72;line-height:1.75}
+.qys-service-card strong{font-size:15px}.qys-service-card p{font-size:13.5px;color:#405a72;line-height:1.85}
+.qys-service-state{font-size:12.5px;font-weight:700;color:#405a72}
+.qys-service-state.is-muted{color:#586f84}
+.qys-app .qys-service-link{font-size:13px!important;min-height:40px!important}
+.qys-services-summary span{font-size:12.5px;color:#405a72}.qys-services-summary strong{font-size:18px;font-weight:800}
+.qys-services-note{font-size:13px;color:#405a72;line-height:1.85}
+.qys-account-summary-copy>span,.qys-account-summary-copy small{font-size:12.5px;color:#405a72}.qys-account-summary-copy strong{font-size:15px}
+.qys-account-avatar{font-weight:800}
+.qys-account-card span{font-size:12.5px;color:#405a72}.qys-account-card strong{font-size:14px}
+.qys-more-list strong{font-size:14px}.qys-more-list small{font-size:13px;color:#405a72;line-height:1.7}
+.qys-app .qys-member-bottomnav button{font-size:13px!important;color:#52677c!important;font-weight:700!important;min-height:58px!important}
+.qys-app .qys-member-bottomnav button[aria-current=page]{color:#075f59!important}
+.qys-app [data-qys-view="home"] .qys-hero-subtitle{font-size:13.5px}
+.qys-app [data-qys-view="home"] .qys-section-title h2{font-size:17px}
+.qys-app [data-qys-view="home"] #qys-member-status{font-size:13px;color:#405a72;line-height:1.8}
+.qys-app [data-qys-view="home"] .qys-pill{font-size:12.5px;padding:5px 9px}
+.qys-home-card-copy h2{font-size:17px!important}.qys-home-card-copy p{font-size:13px;color:#405a72;line-height:1.8}
+.qys-app .qys-home-primary-action{font-size:13px!important;min-height:44px!important}
+.qys-home-mini-card span:not(.qys-home-mini-icon){font-size:12.5px;color:#405a72}.qys-home-mini-card strong{font-size:13.5px}
+.qys-home-programs-head h2{font-size:17px!important}.qys-app .qys-home-programs-all{font-size:12.5px!important;min-height:40px!important}
+.qys-home-program-card-top>span{font-size:13px;color:#465f77}.qys-home-program-card h3{font-size:14.5px!important}.qys-home-program-card p{font-size:13px;color:#405a72;line-height:1.8}.qys-home-program-card-bottom small{font-size:13px;color:#465f77}.qys-app .qys-home-program-card-bottom button{font-size:12.5px!important;min-height:38px!important}
+.qys-async-copy strong{font-size:13.5px;color:#2d526f}.qys-async-copy small{font-size:12.5px;color:#506a80}.qys-app .qys-async-action{font-size:12.5px!important;min-height:40px!important}
+.qys-program-gate-kicker{font-size:12.5px;color:#7a5a1c}.qys-program-access-gate-shell strong{font-size:14.5px;color:#5c4212}.qys-program-access-gate-shell p{font-size:13px;color:#654f25}.qys-app .qys-program-access-gate-shell button{font-size:13px!important;min-height:44px!important}
+.qys-app .qys-family-heading h5{font-size:17px;color:#142f49}.qys-app .qys-family-heading p{font-size:13.5px;color:#405a72;line-height:1.85}.qys-app .qys-family-row small,.qys-app .qys-family-existing span{font-size:13px;color:#465f77}
+.qys-view-heading p,.qys-service-card p,.qys-surface>p,.qys-home-program-card p,.qys-family-heading p{text-align:justify;text-justify:inter-word}
+@media(max-width:550px){
+  .qys-app{font-size:16px;padding-left:10px;padding-right:10px}
+  .qys-view-heading h2{font-size:21px}
+  .qys-app .qys-member-bottomnav button{font-size:13px!important}
+  .qys-app .qys-form-dot{font-size:12.5px}
+}
+@media(max-width:360px){.qys-app .qys-member-bottomnav button{font-size:12.5px!important}}

@@ -1,0 +1,94 @@
+QuranYar Messenger 1.3.1-rc33 — Phase D / D8 Test Report
+Date: 2026-10-06
+Scope: Bounded streaming batch export
+Base: 1.3.1-rc32 / schema 2026.10.06.1 / ledger 21/21
+Target schema: 2026.10.06.1 (unchanged)
+Target ledger after upgrade: 22/22 completed
+
+IMPLEMENTED IN D8
+- Added QYS_Batch_Export as the shared CSV streaming boundary.
+- Contract: mode=streaming / chunk=250 / cursor=keyset / memory=bounded.
+- Centralized UTF-8 BOM, CSV serialization, no-store/nosniff response headers and chunk flushing.
+- Program CSV no longer materializes/caps the full application set at 1000 rows.
+- Added QYS_Program_Repository::applications_export_chunk() with tenant-scoped keyset pagination.
+- Program answers are batch-fetched only for the current export chunk.
+- Excel follow-up export no longer materializes followup_rows() before download.
+- Excel import exclusions and non-sent Queue rows stream as two bounded keyset sources.
+- Added QYS_Campaign_Repository::non_sent_rows_after().
+- Attendance CSV moved from OFFSET pagination to member-id keyset pagination.
+- Added QYS_Member_Repository::attendance_export_chunk_after().
+- Birthday archive CSV moved from OFFSET to descending id keyset pagination while retaining its existing 5000-row policy cap and access audit.
+- Runtime fputcsv/php://output usage is centralized in QYS_Batch_Export.
+- Added Health Center Batch export card.
+- Added infrastructure migration 20261006_022_rc33_batch_export owned by core.
+- No physical schema/data changes; schema remains 2026.10.06.1.
+
+TESTS — WORK TREE
+- PHP syntax: 53/53 PASS.
+- JavaScript syntax: 10/10 PASS.
+- CSS structural check: 10/10 PASS.
+- D8 source/static contracts: 17/17 PASS.
+- Batch export helper runtime: 10/10 assertions PASS.
+  * contract ready/streaming/chunk250/keyset/bounded
+  * UTF-8 BOM/header/two row writes
+- Repository keyset runtime: 16/16 assertions PASS.
+  * Program cursor + tenant scope + ascending keyset + no OFFSET + LIMIT 250
+  * Campaign cursor + non-sent scope + ascending keyset + no OFFSET + LIMIT 250
+  * Attendance member cursor + tenant + roles + ascending keyset + no OFFSET + LIMIT 250
+- D8 migration contract: PASS.
+- Previous Performance regressions D7→D1 / C7 static contract: 15/15 PASS.
+- Hook call-site parity RC32 -> RC33: exact PASS at 55 actions / 6 filters / 2 shortcodes / 1 activation hook.
+- Runtime serialization boundary: fputcsv and php://output occur only in src/Core/BatchExport.php.
+
+SAFETY / COMPATIBILITY
+- Program export still enforces programs_export scope and program visibility before streaming.
+- Sensitive identity output still requires sensitive_identity scope; masking behavior is unchanged.
+- Excel follow-up still requires campaign visibility, Excel campaign type and sensitive_identity permission.
+- Attendance portal/global nonce and tenant/permission checks are unchanged.
+- Birthday archive remains global-admin-only and audit-recorded before export.
+- CSV injection safeguards remain in domain row shaping.
+- D8 does not change Program/Attendance state, Queue delivery semantics, Worker cadence or D6 throughput policy.
+- No existing export hook/action was renamed.
+
+PRODUCTION EXPECTATION
+- Schema = 2026.10.06.1
+- Migration Ledger = 22/22 completed
+- Upgrade gate = ready
+- Module Lifecycle = 17/17 booted
+- Module Registry = 17 modules / 10 features
+- Core migration count = 3
+- Programs migration count = 2
+- Members migration count = 2
+- Messaging migration count = 2
+- Health migration count = 1
+- Batch export = mode: streaming | chunk: 250 | cursor: keyset | memory: bounded
+- Health snapshot = heartbeat: lightweight | full: 15m/on-demand
+- Queue dispatch index = (status,id): ready | pending scan: indexed
+- Queue throughput = mode: adaptive | budget: 20s | max: 30 | rate-limit: stop
+- Programs query plan = forms: batch | counts: grouped | answers: batch
+- Home summary = endpoint: lightweight | programs: compact | forms: deferred
+- Mini-app feature load = programs: lazy | attendance: lazy | data: on_view
+- Runtime schema gate = mode: version_ledger | probes: 0
+- Schema diagnostics = Physical: 12 / 12
+- failed / blocked / degraded = 0
+- Worker / Cron / Retention healthy
+
+ROLLBACK
+- D8 makes no physical schema/data migration.
+- File rollback to RC32 does not require database rollback.
+- Completed migration 022 may remain as historical ledger data.
+
+NEXT
+Phase D / D9 — Birthday index.
+
+ARTIFACT VERIFICATION — EXTRACTED RC33 ZIP
+- PHP syntax: 53/53 PASS.
+- JavaScript syntax: 10/10 PASS.
+- CSS structural check: 10/10 PASS.
+- D8 source/static contracts: 17/17 PASS.
+- Batch export helper runtime: 10/10 assertions PASS.
+- Repository keyset runtime: 16/16 assertions PASS.
+- D8 migration contract: PASS.
+- Previous Performance/C7 regression contracts: 12/12 PASS.
+- Hook inventory: 55 actions / 6 filters / 2 shortcodes / 1 activation hook.
+- ZIP root/plugin structure verified.

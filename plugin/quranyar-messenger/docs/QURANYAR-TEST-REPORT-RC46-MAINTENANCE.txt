@@ -1,0 +1,78 @@
+QuranYar Messenger 1.3.1-rc46 — Maintenance Test Report
+Date: 2026-10-07
+Scope: Targeted messaging UX/edit + Program applicant status notifications
+Base production verified: 1.3.1-rc44 / schema 2026.10.06.2 / ledger 33/33
+Carries forward: RC45 E10 profile-progress correction
+Target schema: 2026.10.06.2 (unchanged)
+Target ledger after full upgrade: 36/36 completed
+
+IMPLEMENTED — M1 TARGETED MESSAGING
+- Preview renders one representative final payload only.
+- Legacy 200-recipient delivery detail table is no longer called by Targeted UI.
+- Draft, scheduled and active campaigns can be edited only while every queue row is still pending.
+- Campaign + queue rows are locked in one transaction for edit.
+- Campaign template/title and all pending payloads rebuild transactionally.
+- Edit locks immediately when any row has left pending.
+- Queue worker reloads canonical payload after claim before outbound marker/network I/O.
+- System audience program_status is excluded from human Targeted list/readiness.
+- Added migration 20261007_035_rc46_targeted_message_edit owned by targetedmessaging.
+
+IMPLEMENTED — M2 PROGRAM STATUS NOTIFICATIONS
+- Successful under_review, waitlisted, accepted, rejected and enrolled actions enqueue a notification immediately.
+- Bulk actions notify only successfully changed applications and batch them by Program + university.
+- Delivery reuses canonical Campaign/Queue worker; no synchronous network send in Program transition request.
+- Templates are editable per Program + campus with Program-wide fallback.
+- Variables: member first name, last name, Program, status and university.
+- verified + messaging consent + active/current university checks are required before enqueue.
+- System campaigns use audience=program_status and global-owner authorization metadata.
+- Added migration 20261007_036_rc46_program_status_notifications owned by programs.
+
+WORK TREE TESTS
+- PHP syntax: 55/55 PASS.
+- JavaScript syntax: 12/12 PASS.
+- CSS structural balance: 10/10 PASS.
+- RC46 source/static contracts: 22/22 PASS.
+- Targeted approved-message edit runtime: 7/7 PASS.
+- Program status notification runtime: 11/11 PASS.
+- Hook inventory RC46: 57 actions / 6 filters / 2 shortcodes / 1 activation hook.
+- Hook parity RC45 -> RC46: exact PASS.
+- Migration definition total: 36 expected entries (7 baseline + 008/009 + 27 module migrations).
+
+ARTIFACT VERIFICATION — EXTRACTED FINAL ZIP
+- PHP syntax: 55/55 PASS.
+- JavaScript syntax: 12/12 PASS.
+- CSS structural balance: 10/10 PASS.
+- RC46 source/static contracts: 22/22 PASS.
+- Targeted approved-message edit runtime: 7/7 PASS.
+- Program status notification runtime: 11/11 PASS.
+
+SAFETY / DATA PROPERTIES
+- Physical DB schema unchanged.
+- No Program/Tenant/Permission/Capacity transition is bypassed by notifications.
+- Program status notification failure does not roll back the already successful domain transition.
+- Program notification Campaigns remain subject to canonical tenant dispatch authorization and member delivery eligibility.
+- Approved-message editing cannot mix old/new text inside one campaign after delivery begins.
+- Worker uses post-claim canonical payload, closing the stale-batch edit race.
+- System Program notification campaigns do not pollute the normal Targeted messaging UI/readiness.
+- No PII is added to Health telemetry or migration metadata.
+
+PRODUCTION EXPECTATION
+- Schema = 2026.10.06.2
+- Migration Ledger = 36/36 completed
+- Upgrade gate = ready
+- Module Lifecycle = 17/17 booted
+- Module Registry = 17 modules / 10 features
+- Members migration count = 5
+- Programs migration count = 10
+- TargetedMessaging migration count = 1
+- Profile progress = ready
+- Message preview / edit = ready
+- Program status notify = ready
+- Runtime schema probes = 0
+- Schema diagnostics = Physical: 12 / 12
+- failed / blocked / degraded = 0
+- Worker / Cron / Retention healthy
+
+PRODUCT ROADMAP
+- Phase F is frozen and not started in RC46.
+- Resume only after current maintenance acceptance and explicit user instruction.

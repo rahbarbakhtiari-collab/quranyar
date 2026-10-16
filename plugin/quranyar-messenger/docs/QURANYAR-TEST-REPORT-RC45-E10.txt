@@ -1,0 +1,77 @@
+QuranYar Messenger 1.3.1-rc45 — Phase E / E10 Test Report
+Date: 2026-10-06
+Scope: Server-authoritative member profile progress
+Base: 1.3.1-rc44 / schema 2026.10.06.2 / ledger 33/33
+Target schema: 2026.10.06.2 (unchanged)
+Target ledger after upgrade: 34/34 completed
+
+IMPLEMENTED IN E10
+- Added QYS_Messenger::profile_progress_contract() via Members module trait.
+- Added server-side profile_progress() using the same seven required completion components as profile_complete.
+- profile_complete now delegates to the canonical progress result.
+- Status API exposes profile_progress: percent/completed/total/complete/missing.
+- Missing list contains only safe field keys, never identity/contact values.
+- Client-side non-empty field counting was removed.
+- Client renders server profile_progress.percent and clamps to 0..100.
+- Legacy response fallback can return 100 only when profile_complete=true.
+- Completed profile progress remains hidden in Home UI.
+- Added Health Center Profile progress contract card.
+- Added migration 20261006_034_rc45_profile_progress owned by members.
+- No physical schema/data rewrite; schema remains 2026.10.06.2.
+
+TESTS — WORK TREE
+- PHP syntax: 54/54 PASS.
+- JavaScript syntax: 12/12 PASS.
+- CSS structural: 10/10 PASS.
+- E10 source/static contracts: 22/22 PASS.
+- E10 profile progress runtime: 24/24 PASS.
+- E10 client progress contract: 8/8 PASS.
+- E9 source/static regression: 25/25 PASS.
+- E9 contract runtime regression: 9/9 PASS.
+- E9 repository runtime regression: 17/17 PASS.
+- E9 client runtime regression: 13/13 PASS.
+- Hook inventory: 57 actions / 6 filters / 2 shortcodes / 1 activation hook.
+
+ARTIFACT VERIFICATION — EXTRACTED RC45 ZIP
+- PHP syntax: 54/54 PASS.
+- JavaScript syntax: 12/12 PASS.
+- CSS structural: 10/10 PASS.
+- E10 source/static contracts: 22/22 PASS.
+- E10 profile progress runtime: 24/24 PASS.
+- E10 client progress contract: 8/8 PASS.
+- E9 regression suite remains PASS.
+- ZIP root/plugin structure verified.
+
+SAFETY / UX PROPERTIES
+- 100% cannot coexist with profile_complete=false when server progress is present.
+- Inactive/invalid university is included in the same canonical completion basis.
+- No new PII is logged or returned in progress metadata; only safe missing field keys are exposed.
+- Messaging consent, verified state, transfer workflow, Tenant scope and Program/Attendance rules are unchanged.
+- No physical schema/data change.
+
+PRODUCTION EXPECTATION
+- Schema = 2026.10.06.2
+- Migration Ledger = 34/34 completed
+- Upgrade gate = ready
+- Module Lifecycle = 17/17 booted
+- Module Registry = 17 modules / 10 features
+- Members migration count = 5
+- Programs migration count = 9
+- Profile progress = source: server | basis: canonical-required | fields: 7 | 100: complete-only | ui: incomplete-only
+- Bulk applicants remains ready
+- Field validation / Form draft / Async states remain ready
+- Runtime schema gate probes = 0
+- Schema diagnostics = Physical: 12 / 12
+- failed / blocked / degraded = 0
+- Worker / Cron / Retention healthy
+
+MANUAL UX ACCEPTANCE
+Deferred to the final project UX/E2E acceptance pack per product decision.
+
+ROLLBACK
+- E10 makes no physical schema/data migration.
+- File rollback to RC44 does not require database rollback.
+- Completed migration 034 may remain as historical ledger data.
+
+NEXT
+Phase F / F1 — Design Tokens after Production Health Verification closes Phase E.

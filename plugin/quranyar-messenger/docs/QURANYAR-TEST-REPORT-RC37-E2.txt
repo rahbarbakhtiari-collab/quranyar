@@ -1,0 +1,73 @@
+QuranYar Messenger 1.3.1-rc37 — Phase E / E2 Test Report
+Date: 2026-10-06
+Scope: Explicit Programs Access Gate
+Base: 1.3.1-rc36 / schema 2026.10.06.2 / ledger 25/25
+Target schema: 2026.10.06.2 (unchanged)
+Target ledger after upgrade: 26/26 completed
+
+IMPLEMENTED IN E2
+- Removed silent client redirect Programs -> Profile.
+- Programs view now owns an explicit shell-level gate.
+- Gate states: membership_required / profile_incomplete / verification_pending / ready.
+- Each blocked state shows a reason and explicit Profile CTA.
+- Programs feature bundle and list/record API are not loaded while the shell gate is blocked.
+- Backend request_member remains authoritative and returns gate/cta metadata.
+- Added QYS_Programs_Module::access_gate_contract().
+- Added Health Center Programs access gate contract card.
+- Added infrastructure migration 20261006_026_rc37_programs_access_gate owned by programs.
+- No physical schema/data change; schema remains 2026.10.06.2.
+
+TESTS — WORK TREE
+- PHP syntax: 54/54 PASS.
+- JavaScript syntax: 10/10 PASS.
+- CSS structural check: 10/10 PASS.
+- E2 source/static contracts: 12/12 PASS.
+- E2 backend gate runtime: 18/18 assertions PASS.
+  * not_registered -> membership_required + تشکیل پرونده
+  * profile_incomplete -> profile_incomplete + تکمیل پرونده
+  * not_verified -> verification_pending + مشاهده وضعیت پرونده
+  * verified complete member -> ready object
+- E2 client gate runtime/static: 13/13 assertions PASS.
+  * checking/membership/incomplete/verification/ready states
+  * no gatedDestination helper/call
+  * blocked Programs does not ensureFeature()
+  * explicit gate CTA handler present
+- Expected hook inventory unchanged from RC36: 57 actions / 6 filters / 2 shortcodes / 1 activation hook.
+
+MANUAL ACCEPTANCE POLICY
+- Product decision: defer routine manual UX/E2E checks for upcoming phases to the final project acceptance pack when automation + Health Center can cover the phase.
+- Manual testing remains early only for destructive/irreversible or otherwise non-automatable risk.
+
+PRODUCTION EXPECTATION
+- Schema = 2026.10.06.2
+- Migration Ledger = 26/26 completed
+- Upgrade gate = ready
+- Module Lifecycle = 17/17 booted
+- Module Registry = 17 modules / 10 features
+- Programs migration count = 3
+- Members migration count = 3
+- Programs access gate = mode: explain | cta: explicit | redirect: none
+- Membership / messaging = membership: independent | messaging: optional | default: off
+- All Phase D readiness contracts remain healthy.
+- Runtime schema probes = 0
+- Schema diagnostics = Physical: 12 / 12
+- failed / blocked / degraded = 0
+- Worker / Cron / Retention healthy
+
+ROLLBACK
+- E2 makes no physical schema/data migration.
+- File rollback to RC36 does not require database rollback.
+- Completed migration 026 may remain as historical ledger data.
+
+NEXT
+Phase E / E3 — Confirmation for destructive actions.
+
+ARTIFACT VERIFICATION — EXTRACTED RC37 PRE-FINAL ZIP
+- PHP syntax: 54/54 PASS.
+- JavaScript syntax: 10/10 PASS.
+- CSS structural check: 10/10 PASS.
+- E2 source/static contracts: 12/12 PASS.
+- E2 backend gate runtime: 18/18 assertions PASS.
+- E2 client gate runtime/static: 13/13 assertions PASS.
+- Hook inventory: 57 actions / 6 filters / 2 shortcodes / 1 activation hook.
+- ZIP root/plugin structure verified.

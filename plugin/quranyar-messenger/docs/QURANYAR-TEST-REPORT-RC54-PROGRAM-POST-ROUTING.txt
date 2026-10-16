@@ -1,0 +1,67 @@
+QuranYar Messenger 1.3.1-rc54 — Program POST Routing & Redirect Safety Test Report
+Date: 2026-10-11
+Scope: Blank portal after applicant status transition; all related Program status actions
+Base: 1.3.1-rc53 / schema 2026.10.11.2 / ledger 41/41
+Target schema: 2026.10.11.2 (unchanged)
+Target ledger: 42/42 completed
+
+ROOT CAUSE
+- Program state-changing POST was handled from QYS_Programs_Module::page().
+- Standalone portal template prints document/header before do_shortcode().
+- Redirect therefore occurred during render instead of pre-render PRG routing.
+- On server/output-buffer combinations where headers were already committed, state changed but redirect could fail, leaving the portal shell with an empty main region.
+
+IMPLEMENTED
+- route_portal_post() on template_redirect priority 8.
+- route_admin_post() on admin_init priority 60.
+- Removed late handle_post() call from page() render path.
+- Canonical redirect preserves program_id, applicant filters and #qys-program-applicants anchor.
+- headers_sent fallback renders a visible completion state/link instead of blank shell.
+- Program notification enqueue now has queue_for_applications_safe().
+- Single and bulk applicant status handlers use fail-soft notification enqueue.
+- Added Health contract/card: Program action routing.
+- Added migration 20261011_042_rc54_program_pre_render_post_redirect owned by programs.
+
+STATUS MATRIX REVIEWED
+- submitted -> under_review
+- submitted/under_review -> waitlisted
+- submitted/under_review/waitlisted -> accepted
+- submitted/under_review/waitlisted -> rejected
+- accepted -> enrolled
+- bulk under_review/waitlisted/accepted/rejected/enroll uses the same routing boundary
+
+TESTS — WORK TREE
+- PHP syntax: 57/57 PASS
+- JavaScript syntax: 12/12 PASS
+- CSS structural: 10/10 PASS
+- RC54 hook/runtime contract: 7/7 PASS
+- Notification unexpected-exception fail-soft runtime: 1/1 PASS
+- Status/routing static matrix: 10/10 PASS
+- M8 migration contract: 1/1 PASS
+- Programs migration definitions: 13
+- Hook inventory: 59 actions / 6 filters / 2 shortcodes / 1 activation hook (RC54 adds only the 2 pre-render routing hooks).
+
+SAFETY
+- Tenant/permission/nonce checks remain in handle_post().
+- Domain transition rules/capacity/waitlist policy unchanged.
+- Notification remains secondary to committed domain state.
+- No physical schema or data rewrite.
+- Phase F remains frozen.
+
+PRODUCTION EXPECTATION
+- Schema = 2026.10.11.2
+- Migration Ledger = 42/42 completed
+- Programs migration count = 13
+- Physical diagnostics = 13/13
+- Program action routing = portal: template-redirect | admin: admin-init | timing: pre-render | notify: fail-soft
+- failed / blocked / degraded = 0
+
+MANUAL PRODUCTION CHECK
+- Change one applicant to under_review and confirm detail page returns normally.
+- Check waitlisted, accepted, rejected on valid test transitions.
+- Accept then enroll a test applicant and confirm normal return.
+- Notification failure must not blank the page or undo an already-committed state change.
+
+ROLLBACK
+- File rollback to RC53 requires no DB rollback.
+- Migration 042 may remain as historical completed ledger entry.

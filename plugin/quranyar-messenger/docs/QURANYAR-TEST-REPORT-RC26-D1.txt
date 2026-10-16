@@ -1,0 +1,115 @@
+QuranYar Messenger 1.3.1-rc26 — Phase D / D1 Test Report
+Date: 2026-10-06
+Scope: Runtime Schema Introspection Removal
+Base: 1.3.1-rc25 / schema 2026.10.05.7 / ledger 14/14
+Target schema: 2026.10.05.7 (unchanged)
+Target ledger after upgrade: 15/15 completed
+
+IMPLEMENTED IN D1
+- Added QYS_Schema_Runtime as the request-cached runtime readiness gate.
+- Runtime readiness now depends on install state + schema version + Migration Ledger readiness.
+- Normal runtime schema/table readiness no longer executes SHOW TABLES / SHOW COLUMNS / SHOW INDEX.
+- Centralized all physical SHOW* diagnostics inside QYS_Table_Names diagnostic methods.
+- Added runtime_exists() for fast table readiness and retained historical exists() only as a compatibility diagnostic alias.
+- Split repository/domain readiness into fast runtime checks and explicit diagnostic_schema_ready() contracts.
+- Installer, dbDelta verification, migrations/backfills and Health Center retain physical schema validation.
+- Health Center deep schema diagnostics run only on explicit qys-health admin rendering, not worker/snapshot runtime.
+- Health Center adds Runtime schema gate telemetry and explicit Schema diagnostics readiness.
+- Preserved C5 one-way Program/Attendance boundary by extending the boundary contract for diagnostics instead of referencing Attendance implementation from Programs.
+- Added infrastructure migration 20261006_015_rc26_runtime_schema_guard owned by core.
+- No physical schema/domain data migration; schema remains 2026.10.05.7.
+
+RUNTIME CONTRACT
+- qys_install_state must be ready.
+- qys_schema_version must equal 2026.10.05.7.
+- Migration Ledger must be initialized/ready when ledger readiness is required.
+- Result is request-cached.
+- Runtime schema probes: 0 database SHOW* queries.
+- Physical schema introspection is an explicit diagnostic/installer concern.
+
+TESTS — WORK TREE
+- PHP syntax: 54/54 PASS.
+- JavaScript syntax: 10/10 PASS.
+- CSS structural check: 10/10 PASS.
+- D1 source/static contracts: 27/27 PASS.
+- Runtime schema guard: 10 assertions PASS.
+  * runtime SHOW* queries: 0
+  * explicit diagnostic cache queries: 1
+- Module Registry/Lifecycle runtime: 34 assertions PASS.
+  * modules: 17/17
+  * features: 10
+  * module-registry migration_count: 1
+  * core migration_count: 2
+  * attendance deps: core,universities,programs
+- RC25 -> RC26 Migration Ledger regression: 17 assertions PASS.
+  * before: 14 completed + migration 015 pending
+  * bounded run: 1 migration
+  * after: 15/15 completed
+- Full plugin include/init boot smoke: 20 assertions PASS.
+  * modules: 17/17
+  * actions: 53
+  * filters: 4
+  * shortcodes: 2
+  * activation hooks: 1
+- C6 source/static contracts: 35/35 PASS.
+- C6 Repository runtime: 15 assertions PASS; 23 repository operations exercised.
+- C5 boundary regression: 12 assertions PASS.
+- C5 Attendance adapter regression: 10 assertions PASS.
+- C5 Permission/Targeted regression: 7 assertions PASS.
+- C5 Security/owner regression: 6 assertions PASS.
+- Hook parity RC25 -> RC26:
+  * actions: 53 = 53 PASS
+  * filters: 4 = 4 PASS
+  * shortcodes: 2 = 2 PASS
+  * activation hooks: 1 = 1 PASS
+
+SAFETY / COMPATIBILITY
+- No table or column is added/removed.
+- No domain row is rewritten by migration 015.
+- Fresh install and migration verification still use physical diagnostic contracts.
+- Runtime fast readiness fails closed when version/Ledger is not ready.
+- Existing Phase C Module Registry, lifecycle, repository ownership and dependency boundaries remain intact.
+- WordPress hook registration is unchanged.
+- Rollback to RC25 is file-only; completed migration 015 can remain historical.
+
+LIVE TEST STATUS
+- RC25 / C7 Health is Production Verified from the 2026-10-06 Health Center screenshot.
+- Phase C is Production Verified complete.
+- RC26 has not yet been installed on Production.
+- Production verification of Ledger 15/15, runtime probes=0 and physical diagnostics 12/12 is pending installation.
+- Live Edge Acceptance debt from Phase A/B remains deferred.
+
+INSTALL / UPGRADE
+- Replace RC25 with RC26; do not delete/reinstall the plugin.
+- No physical database migration is required.
+- First ordinary WordPress request should execute migration 015 automatically.
+- Expected Health Center:
+  Schema = 2026.10.05.7
+  Migration Ledger = 15/15 completed
+  Upgrade gate = ready
+  Module Lifecycle = 17/17 booted
+  Module Registry = 17 modules / 10 features
+  core migration count = 2
+  Runtime schema gate = mode version_ledger / probes 0
+  Schema diagnostics = Physical 12/12
+  failed/blocked/degraded = 0
+  Worker/Cron/Retention healthy
+
+FINAL ARTIFACT VERIFICATION
+- ZIP integrity test: PASS.
+- Final ZIP extracted to a clean directory: PASS.
+- PHP lint rerun against extracted ZIP: 54/54 PASS.
+- JavaScript syntax rerun: 10/10 PASS.
+- CSS structural rerun: 10/10 PASS.
+- D1 source/static contracts rerun: 27/27 PASS.
+- Runtime schema guard rerun: 10 assertions PASS; runtime SHOW* queries = 0.
+- Module Registry/Lifecycle runtime rerun: 34 assertions PASS; 17/17 modules / 10 features.
+- Migration regression rerun: 17 assertions PASS; Ledger 14/15 -> 15/15.
+- Full plugin boot smoke rerun: 20 assertions PASS.
+- C6 source/static contracts rerun: 35/35 PASS.
+- C6 Repository runtime rerun: 15 assertions PASS.
+- C5 boundary regressions rerun: 12 + 10 + 7 + 6 assertions PASS.
+- Hook parity rerun: 53 actions / 4 filters / 2 shortcodes / 1 activation hook PASS.
+
+SHA256
+(recorded in the external release test report after packaging)
