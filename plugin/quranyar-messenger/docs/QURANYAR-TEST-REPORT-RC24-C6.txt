@@ -1,0 +1,89 @@
+QuranYar Messenger 1.3.1-rc24 — Phase C / C6 Test Report
+Date: 2026-10-06
+Scope: Repository Ownership
+Base: 1.3.1-rc23 / schema 2026.10.05.7 / ledger 12/12
+Target schema: 2026.10.05.7 (unchanged)
+Target ledger after upgrade: 13/13 completed
+
+IMPLEMENTED IN C6
+- Program-domain runtime persistence is now owned by QYS_Program_Repository.
+- QYS_Program_Service and QYS_Programs_Module contain no direct $wpdb usage or SQL literals.
+- Added repository transaction, admission, audit, Program/Application/Enrollment/Form, attendance-link, member-record and reconciliation operations.
+- QYS_Members_Module no longer writes birthday_log directly; member-scoped pending birthday cancellation is owned by QYS_Member_Repository.
+- QYS_Targeted delegates runtime metadata insert, launch timestamp, cancel timestamp and due-schedule selection to QYS_Campaign_Repository.
+- Targeted schema DDL remains in the owning feature; it is not runtime domain persistence.
+- QYS_Multitenant delegates runtime transaction and audit persistence to QYS_University_Repository.
+- Cross-domain attendance-open safety read is delegated to the Attendance domain API instead of issuing SQL from Multitenant.
+- Multitenant schema DDL/introspection remains with the schema owner.
+- Added infrastructure migration 20261006_013_rc24_repository_ownership owned by the Programs lifecycle module.
+- No physical schema/domain data migration; schema remains 2026.10.05.7.
+
+PERSISTENCE CONTRACT
+- Business/service layers coordinate policy and transactions but do not own SQL for repository-backed tables.
+- Shared Program tables => QYS_Program_Repository.
+- Member tables / member-scoped birthday cancellation => QYS_Member_Repository.
+- Campaign/queue/targeted runtime metadata => QYS_Campaign_Repository.
+- Universities/representative runtime persistence + tenant audit => QYS_University_Repository.
+- Feature-local DDL/diagnostics may remain in the owning module/installer.
+- Legacy self-owned domains without a pre-existing repository are not converted into new repositories in C6; that class-splitting work is a separate P2-04 concern.
+
+TESTS — WORK TREE
+- PHP syntax: 47/47 PASS.
+- JavaScript syntax: 10/10 PASS.
+- CSS structural check: 10/10 PASS.
+- C6 source/static contracts: 35/35 PASS.
+- Repository ownership runtime: 15 assertions PASS.
+- Module lifecycle runtime: 17 assertions PASS; 17/17 modules booted.
+- Programs lifecycle migration_count = 1 PASS.
+- Attendance dependency = core,universities,programs PASS.
+- RC23 -> RC24 Migration Ledger regression: 18 assertions PASS.
+  * before: 12 completed + migration 013 pending
+  * bounded run: 1 migration
+  * after: 13/13 completed, pending=0, failed=0
+  * C6 checkpoint=complete, plugin_version=1.3.1-rc24
+  * QYS_C6_REPOSITORY_OWNERSHIP_VERIFIED=true
+- C5 Program/Attendance boundary runtime: 11 assertions PASS.
+- C5 Attendance adapter runtime/backfill: 10 assertions PASS.
+- C5 Permission/Targeted authorization runtime: 7 assertions PASS.
+- C5 Security/global-owner runtime: 6 assertions PASS.
+- Full plugin include/init boot smoke: 15 assertions PASS; 17/17 modules booted.
+- Hook parity RC23 -> RC24:
+  * actions: 53 = 53 PASS
+  * filters: 4 = 4 PASS
+  * shortcodes: 2 = 2 PASS
+  * activation hooks: 1 = 1 PASS
+- Shared helper behavior parity RC23 -> RC24: PASS.
+
+SAFETY / COMPATIBILITY
+- No Program/Member/Targeted/University business state policy is changed.
+- No table or column is added/removed.
+- No existing row is rewritten by migration 013.
+- C5 one-way dependency boundaries remain intact.
+- Existing WordPress hook registration is unchanged.
+- Rollback to RC23 is file-only; completed migration 013 can remain as historical ledger data.
+
+LIVE TEST STATUS
+- RC23 / C5 Health is Production Verified from the 2026-10-06 Health Center screenshot.
+- RC24 has not yet been installed on Production.
+- Production verification of Ledger 13/13, Programs migration count and lifecycle health is pending installation.
+- Live Edge Acceptance debt from Phase A/B remains deferred.
+
+INSTALL / UPGRADE
+- Replace RC23 with RC24; do not delete/reinstall the plugin.
+- No physical database migration is required.
+- First ordinary WordPress request should execute migration 013 automatically.
+- Expected Health Center:
+  Schema = 2026.10.05.7
+  Migration Ledger = 13/13 completed
+  Upgrade gate = ready
+  Module Lifecycle = 17/17 booted
+  Programs migration count = 1
+  failed/blocked/degraded = 0
+  Worker/Cron/Retention healthy
+
+FINAL ARTIFACT VERIFICATION
+- Final release ZIP is built from this tested work tree and must pass a clean re-extraction rerun before release.
+- The external sidecar test report records the final artifact PASS result and SHA256; the ZIP does not embed its own self-referential checksum.
+
+SHA256
+- See the external release test report distributed with this artifact.

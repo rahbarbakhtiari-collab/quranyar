@@ -1,0 +1,87 @@
+QuranYar Messenger 1.3.1-rc36 — Phase E / E1 Test Report
+Date: 2026-10-06
+Scope: Membership independent from Messaging Consent
+Base: 1.3.1-rc35 / schema 2026.10.06.2 / ledger 24/24
+Target schema: 2026.10.06.2 (unchanged)
+Target ledger after upgrade: 25/25 completed
+
+IMPLEMENTED IN E1
+- Profile/membership creation no longer requires messaging consent.
+- New members default to consent=off unless explicit Eitaa write-access opt-in was granted.
+- Existing members keep their current consent when editing profile data.
+- Welcome delivery is attempted only when a newly-created member has messaging consent.
+- REST status exposes explicit membership_active and messaging_consent while retaining registered/enabled compatibility fields.
+- Mini-app registration save button is independent from requestWriteAccess.
+- Denied/unavailable messaging permission does not block profile creation.
+- Account/More attention no longer treats messaging-off as an incomplete membership.
+- Birthday service UI requires both birthday opt-in and messaging consent before showing active.
+- Added Health Center contract card: Membership / messaging.
+- Added infrastructure migration 20261006_025_rc36_membership_messaging_consent owned by members.
+- No physical schema/data rewrite; schema remains 2026.10.06.2.
+
+TESTS — WORK TREE
+- PHP syntax: 54/54 PASS.
+- JavaScript syntax: 10/10 PASS.
+- CSS structural check: 10/10 PASS.
+- E1 source/static contracts: 30/30 PASS.
+- E1 runtime contract: 7/7 PASS.
+- D10 Portal Asset Policy runtime: 20/20 PASS.
+- D10 Feature enqueue runtime: 18/18 PASS.
+- D10 migration contract: PASS.
+- Hook call-site inventory: 57 actions / 6 filters / 2 shortcodes / 1 activation hook (unchanged from RC35).
+
+SAFETY PROPERTIES
+- initData authentication unchanged.
+- Tenant and permission boundaries unchanged.
+- stop/reactivate messaging endpoints remain separate and explicit.
+- No historical consent values are rewritten.
+- No cancelled queue/birthday rows are resurrected.
+- Delivery-state/lease/uncertain semantics unchanged.
+- Profile edit never implicitly enables messaging.
+
+PRODUCTION EXPECTATION
+- Schema = 2026.10.06.2
+- Migration Ledger = 25/25 completed
+- Upgrade gate = ready
+- Module Lifecycle = 17/17 booted
+- Module Registry = 17 modules / 10 features
+- Members migration count = 3
+- Membership / messaging = membership: independent | messaging: optional | default: off
+- Portal assets = shell: base | feature: conditional | scope: section+permission
+- Birthday lookup = column: birth_md | query: exact | index: ready
+- Batch export = mode: streaming | chunk: 250 | cursor: keyset | memory: bounded
+- Health snapshot = heartbeat: lightweight | full: 15m/on-demand
+- Queue dispatch index = (status,id): ready | pending scan: indexed
+- Queue throughput = mode: adaptive | budget: 20s | max: 30 | rate-limit: stop
+- Programs query plan = forms: batch | counts: grouped | answers: batch
+- Home summary = endpoint: lightweight | programs: compact | forms: deferred
+- Mini-app feature load = programs: lazy | attendance: lazy | data: on_view
+- Runtime schema gate = mode: version_ledger | probes: 0
+- Schema diagnostics = Physical: 12 / 12
+- failed / blocked / degraded = 0
+- Worker / Cron / Retention healthy
+
+LIVE UX ACCEPTANCE
+- A new test account can create its profile without granting messaging permission.
+- The new profile shows messaging disabled.
+- Explicit later reactivation changes only messaging consent; the profile remains the same.
+
+ROLLBACK
+- E1 has no physical schema/data migration.
+- File rollback to RC35 does not require database rollback.
+- Completed migration 025 may remain as historical ledger data.
+
+NEXT
+Phase E / E2 — Programs access gate clarity.
+
+ARTIFACT VERIFICATION — EXTRACTED RC36 ZIP
+- PHP syntax: 54/54 PASS.
+- JavaScript syntax: 10/10 PASS.
+- CSS structural check: 10/10 PASS.
+- E1 source/static contracts: 30/30 PASS.
+- E1 runtime contract: 7/7 PASS.
+- D10 Portal Asset Policy runtime: 20/20 PASS.
+- D10 Feature enqueue runtime: 18/18 PASS.
+- D10 migration contract: PASS.
+- Hook inventory: 57 actions / 6 filters / 2 shortcodes / 1 activation hook.
+- ZIP root/plugin structure verified.

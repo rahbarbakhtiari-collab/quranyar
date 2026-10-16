@@ -1,0 +1,50 @@
+.qys-app{max-width:580px;margin:24px auto;padding:28px;border:1px solid #dbe5ed;border-radius:16px;box-sizing:border-box;font:16px/1.8 system-ui,Tahoma,sans-serif;background:#fff;color:#172b43}
+.qys-app *{box-sizing:border-box}.qys-app h2,.qys-app h3{line-height:1.6;color:#16395d}.qys-app h2{font-size:1.6rem}.qys-app h3{font-size:1.15rem}
+.qys-app button{border-radius:9px;border:1px solid #124a82;background:#14518f;color:white;padding:10px 16px;font:inherit;cursor:pointer;display:inline-block;text-decoration:none}
+.qys-app button:disabled{opacity:.55;cursor:not-allowed}.qys-app label{display:block;margin-block:12px}.qys-app input{width:100%;padding:10px;border-radius:8px;border:1px solid #a8bac8;font:inherit;direction:rtl}
+.qys-app .qys-danger{color:#932a2a;border-color:#cc9c9c;background:white}
+
+.qys-app #qys-browser-notice{padding:10px;text-align:center}.qys-app [role=status]{font-weight:500;min-height:1.5em}.qys-app small{color:#4d6275}.qys-app [hidden]{display:none!important}
+@media(max-width:560px){.qys-app{margin:10px;padding:16px;border-radius:12px}.qys-app button{width:100%;margin-block:4px}}
+
+.qys-app select{width:100%;padding:10px;border:1px solid #a8bac8;border-radius:8px;background:#fff;font:inherit;color:inherit}
+.qys-app input[type="checkbox"]{width:auto;min-width:18px;height:18px;vertical-align:middle;accent-color:#14518f;margin-left:8px}
+.qys-app .qys-check label{display:flex;align-items:flex-start;gap:6px;font-weight:500}
+.qys-app .qys-check input{flex-shrink:0;margin-top:6px}
+.qys-app input:focus,.qys-app select:focus,.qys-app button:focus{outline:2px solid #2763a5;outline-offset:2px}
+.qys-app #qys-profile-wrap{border-top:1px solid #dbe5ed;margin-top:20px;padding-top:8px}
+.qys-app input[name="national_id"],.qys-app input[name="mobile"],.qys-app input[name="birth_jalali"]{direction:ltr;text-align:right;font-variant-numeric:tabular-nums}
+.qys-app form small{display:block;margin-top:3px;line-height:1.65}
+.qys-app #qys-cancel-edit{background:white;color:#164476}
+
+.qys-app fieldset.qys-birthday{border:1px solid #b4c5d1;border-radius:10px;padding:12px;margin-block:14px;min-width:0}
+.qys-app .qys-birthday legend{padding-inline:8px;font-weight:700}
+.qys-app .qys-birthday-fields{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:8px}
+.qys-app .qys-birthday-fields label{margin:2px 0;min-width:0}
+.qys-app .qys-birthday-fields input,.qys-app .qys-birthday-fields select{width:100%;min-width:0;direction:rtl}
+.qys-app #qys-birth-year{direction:ltr;text-align:center;font-variant-numeric:tabular-nums}
+@media(max-width:370px){.qys-app .qys-birthday-fields{grid-template-columns:1fr 1fr}.qys-app .qys-birthday-fields label:last-child{grid-column:1 / -1}}
+
+.qys-app #qys-birth-hint:not(:empty){color:#a43620;font-weight:600}
+
+/* RC50 family attribution: independent from primary institutional role. */
+.qys-app .qys-family-section{margin-block:16px;padding:14px;border:1px solid #c9d9e5;border-radius:12px;background:#f8fbfd}
+.qys-app .qys-family-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.qys-app .qys-family-heading h5{margin:0 0 4px;font-size:1rem;color:#16395d}
+.qys-app .qys-family-heading p{margin:0;color:#4d6275;font-size:.92rem;line-height:1.7}
+.qys-app .qys-family-list{display:grid;gap:10px;margin-block:12px}
+.qys-app .qys-family-row{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr) auto;gap:10px;align-items:end;padding:10px;border:1px solid #dbe5ed;border-radius:10px;background:#fff}
+.qys-app .qys-family-row label{margin:0}.qys-app .qys-family-row small{font-size:.78rem}
+.qys-app .qys-family-existing{display:grid;gap:3px;padding:8px 10px;border:1px dashed #b8c9d6;border-radius:8px;background:#f8fbfd}
+.qys-app .qys-family-existing span{font-size:.78rem;color:#66798a}.qys-app .qys-family-existing strong{color:#16395d}
+.qys-app .qys-family-remove{background:#fff;color:#932a2a;border-color:#cc9c9c;padding:9px 12px}
+.qys-app .qys-family-add{background:#fff;color:#164476}
+.qys-app #qys-family-required.qys-pill--warning{background:#fff3cd;color:#744d00;border-color:#ead39a}
+@media(max-width:560px){.qys-app .qys-family-heading{display:grid}.qys-app .qys-family-row{grid-template-columns:1fr}.qys-app .qys-family-remove{width:100%}}
+
+/* RC51 mobile OTP verification. */
+.qys-app .qys-mobile-field{display:grid;gap:8px}.qys-app .qys-mobile-otp{padding:12px;border:1px solid #c9d9e5;border-radius:11px;background:#f8fbfd}
+.qys-app .qys-mobile-otp-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.qys-app .qys-mobile-otp-head strong{color:#16395d}
+.qys-app .qys-mobile-otp-code{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:end}.qys-app #qys-mobile-otp-code{direction:ltr;text-align:center;letter-spacing:.25em;font-variant-numeric:tabular-nums}
+.qys-app #qys-mobile-otp-status.is-good{background:#e9f7f0;color:#126848;border-color:#ccebdc}.qys-app #qys-mobile-otp-status.is-warn{background:#fff6df;color:#815c13;border-color:#f0dfad}
+@media(max-width:560px){.qys-app .qys-mobile-otp-code{grid-template-columns:1fr}.qys-app .qys-mobile-otp-head{align-items:flex-start;flex-direction:column}.qys-app #qys-mobile-otp-verify{width:100%}}
