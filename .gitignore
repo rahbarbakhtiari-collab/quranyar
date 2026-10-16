@@ -1,0 +1,21 @@
+# Local secrets and configuration
+.env
+.env.*
+!.env.example
+wp-config.php
+*.pem
+*.key
+id_rsa*
+
+# Local caches, backups and user data
+*.log
+*.sql
+*.sqlite
+*.bak
+*.backup
+.DS_Store
+Thumbs.db
+node_modules/
+vendor/
+*.tmp
+.cache/
